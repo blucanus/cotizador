@@ -1,0 +1,66 @@
+[
+    {
+        "producto": "Soleras de 70 x 2,60 mts.",
+        "precio":  4128.05,
+        "cant_m2": 0.8,
+        "unidadMedida": "perfiles",
+        "metrosLinealesPorUnidad": 2.6,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Montantes de 70 x 2,60 mts.",
+        "precio": 3762.96,
+        "cant_m2": 2,
+        "unidadMedida": "perfiles",
+        "metrosLinealesPorUnidad": 2.6,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Tornillos T1 punta mecha x 100 un.",
+        "precio": 2059.83,
+        "cant_m2": 10,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Tornillos T2 punta aguja x 100 un.",
+        "precio": 1364.09,
+        "cant_m2": 20,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Cinta de papel GR x 150 mts.",
+        "precio": 9534.02,
+        "cant_m2": 3.30,
+        "unidadMedida": "rollos",
+        "metrosLinealesPorUnidad": 150,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Masilla x 28 kg.",
+        "precio": 23158.34,
+        "cant_m2": 1.80,
+        "unidadMedida": "baldes",
+        "unidadesPorPaquete": 28,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Fijaciones nº 8 x 100 un.",
+        "precio": 5813.37,
+        "cant_m2": 3.5,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Placas STD 12,5 x 1,20 x 2,40m Knauf",
+        "precio": 12098.12,
+        "cant_m2": 2.05,
+        "unidadMedida": "placas",
+        "areaUnidad": 2.88, 
+        "redondeo": "ceil"
+    }
+]

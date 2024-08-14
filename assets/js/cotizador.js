@@ -5,12 +5,14 @@ document.getElementById('calcular').addEventListener('click', () => {
             .then(response => response.json())
             .then(productos => {
                 let resultadoHTML = '<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th></tr>';
-                let mensaje = `Cotización para ${metros} metros cuadrados:\n`;
+                let mensaje = `Realicé esta cotización en la página web para *${metros} metros cuadrados*:\n\n`;
+                
+
+                let totalCotizacion = 0;
 
                 productos.forEach(producto => {
                     const { producto: nombre, precio, cant_m2, redondeo, unidadesPorPaquete, areaUnidad, metrosLinealesPorUnidad } = producto;
                     const cantidadNecesaria = cant_m2 * metros;
-                    const totalCompra = 0;
                     let cantidadFinal = 0;
 
                     // Aplicar el tipo de redondeo
@@ -34,25 +36,32 @@ document.getElementById('calcular').addEventListener('click', () => {
                     }
 
                     const total = precio * cantidadFinal;
-                    
+                    totalCotizacion += total;
 
                     resultadoHTML += `<tr>
                         <td>${nombre}</td>
                         <td>${cantidadFinal} ${producto.unidadMedida}</td>
                         <td>$${total.toFixed(2)}</td>
-                        
                     </tr>`;
-                    
-                    mensaje += `${nombre}: ${cantidadFinal} ${producto.unidadMedida}, Total: $ ${total.toFixed(2)}\n`;
+
+                    // Añadir la información del producto con un salto de línea
+                    mensaje += `${nombre}: ${cantidadFinal} ${producto.unidadMedida}, Total: $${total.toFixed(2)}\n`;
                 });
 
-                
-
+                // Añadir el total de la cotización al final de la tabla
+                resultadoHTML += `<tr>
+                    <td colspan="2"><strong>Total de la cotización</strong></td>
+                    <td><strong>$${totalCotizacion.toFixed(2)}</strong></td>
+                </tr>`;
                 resultadoHTML += '</table>';
+
+                // Añadir el total de la cotización al mensaje de WhatsApp
+                mensaje += `\n*Total de la cotización: $${totalCotizacion.toFixed(2)}*`;
+
                 document.getElementById('resultado').innerHTML = resultadoHTML;
                 document.getElementById('whatsapp').style.display = 'block';
 
-                const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+                const whatsappLink = `https://wa.me/542215755696?text=${encodeURIComponent(mensaje)}`;
                 document.getElementById('whatsapp').onclick = () => window.open(whatsappLink, '_blank');
             })
             .catch(error => console.error('Error al obtener los datos:', error));

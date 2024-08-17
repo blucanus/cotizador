@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador</title>
+</head>
+<body>
+    <h1>Cotizador</h1>
+    <label for="metros">Metros Cuadrados:</label>
+    <input type="number" id="metros" placeholder="Ingrese metros cuadrados" style="-webkit-appearance: none;background-color: #eee;border-width: 0;border-radius: 0;color: #999;font-size: 14px;padding: 16px;">
+    <button id="calcular" class="et_pb_button et_pb_more_button" style="background-color: #2A2B67;color:#fff;">Calcular</button>
+
+    <h2>Resultado</h2>
+    <div id="resultado">
+        <!-- Los resultados se mostrarán aquí -->
+    </div>
+    
+    <button id="whatsapp" style="display:none;background-color: #2A2B67;color:#fff;" class="et_pb_button et_pb_more_button">Consultar por WhatsApp</button>
+
+    <script>
+        document.getElementById('calcular').addEventListener('click', () => {
+    const metros = parseFloat(document.getElementById('metros').value);
+    if (metros && metros > 0) {
+        const productos = [
+    {
+        "producto": "Soleras de 70 x 2,60 mts.",
+        "precio":  4128.05,
+        "cant_m2": 0.8,
+        "unidadMedida": "perfiles",
+        "metrosLinealesPorUnidad": 2.6,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Montantes de 70 x 2,60 mts.",
+        "precio": 3762.96,
+        "cant_m2": 2,
+        "unidadMedida": "perfiles",
+        "metrosLinealesPorUnidad": 2.6,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Tornillos T1 punta mecha x 100 un.",
+        "precio": 2059.83,
+        "cant_m2": 10,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Tornillos T2 punta aguja x 100 un.",
+        "precio": 1364.09,
+        "cant_m2": 20,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Cinta de papel GR x 150 mts.",
+        "precio": 9534.02,
+        "cant_m2": 3.30,
+        "unidadMedida": "rollos",
+        "metrosLinealesPorUnidad": 150,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Masilla x 28 kg.",
+        "precio": 23158.34,
+        "cant_m2": 1.80,
+        "unidadMedida": "baldes",
+        "unidadesPorPaquete": 28,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Fijaciones nº 8 x 100 un.",
+        "precio": 5813.37,
+        "cant_m2": 3.5,
+        "unidadMedida": "paquetes",
+        "unidadesPorPaquete": 100,
+        "redondeo": "ceil"
+    },
+    {
+        "producto": "Placas STD 12,5 x 1,20 x 2,40m Knauf",
+        "precio": 12098.12,
+        "cant_m2": 2.05,
+        "unidadMedida": "placas",
+        "areaUnidad": 2.88, 
+        "redondeo": "ceil"
+    }
+];
+                let resultadoHTML = '<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th></tr>';
+                let mensaje = `Realicé esta cotización en la página web para *${metros} metros cuadrados*:\n\n`;
+                
+
+                let totalCotizacion = 0;
+
+                productos.forEach(producto => {
+                    const { producto: nombre, precio, cant_m2, redondeo, unidadesPorPaquete, areaUnidad, metrosLinealesPorUnidad } = producto;
+                    const cantidadNecesaria = cant_m2 * metros;
+                    let cantidadFinal = 0;
+
+                    // Aplicar el tipo de redondeo
+                    if (redondeo === "ceil") {
+                        if (areaUnidad) {
+                            // Calcula el número de placas necesario según el área de cada placa
+                            //const areaTotal = cantidadNecesaria / cant_m2;
+                            cantidadFinal = Math.ceil(cantidadNecesaria / areaUnidad);
+                        } else if (unidadesPorPaquete) {
+                            // Redondear al número de paquetes
+                            cantidadFinal = Math.ceil(cantidadNecesaria / unidadesPorPaquete);
+                        } else if (metrosLinealesPorUnidad) {
+                            // Redondear al número de unidades necesarias para cubrir metros lineales
+                            const totalMetrosLineales = cantidadNecesaria;
+                            cantidadFinal = Math.ceil(totalMetrosLineales / metrosLinealesPorUnidad);
+                        } else {
+                            cantidadFinal = Math.ceil(cantidadNecesaria);
+                        }
+                    } else {
+                        cantidadFinal = Math.round(cantidadNecesaria);
+                    }
+
+                    const total = precio * cantidadFinal;
+                    totalCotizacion += total;
+
+                    resultadoHTML += `<tr>
+                        <td>${nombre}</td>
+                        <td>${cantidadFinal} ${producto.unidadMedida}</td>
+                        <td>$${total.toFixed(2)}</td>
+                    </tr>`;
+
+                    // Añadir la información del producto con un salto de línea
+                    mensaje += `${nombre}: ${cantidadFinal} ${producto.unidadMedida}, Total: $${total.toFixed(2)}\n`;
+                });
+
+                // Añadir el total de la cotización al final de la tabla
+                resultadoHTML += `<tr>
+                    <td colspan="2"><strong>Total de la cotización</strong></td>
+                    <td><strong>$${totalCotizacion.toFixed(2)}</strong></td>
+                </tr>`;
+                resultadoHTML += '</table>';
+
+                // Añadir el total de la cotización al mensaje de WhatsApp
+                mensaje += `\n*Total de la cotización: $${totalCotizacion.toFixed(2)}*`;
+
+                document.getElementById('resultado').innerHTML = resultadoHTML;
+                document.getElementById('whatsapp').style.display = 'block';
+
+                const whatsappLink = `https://wa.me/541138009483?text=${encodeURIComponent(mensaje)}`;
+                document.getElementById('whatsapp').onclick = () => window.open(whatsappLink, '_blank');
+            }else {
+                alert('Por favor, ingrese una cantidad válida de metros cuadrados.');
+            }
+        });
+
+    </script>
+</body>
+</html>

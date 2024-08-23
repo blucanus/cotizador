@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizador Múltiple</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .container-cotizador {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .cotizador-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #292b67;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #0ca2d3;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .edit-input {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      #whatsappButton {
+        display: block;
+        margin-top: 20px;
+      }
+      @media (max-width: 478px){
+        .cotizador-buttons {
+            flex-wrap: wrap;
+        flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-cotizador">
+      <h1>Cotizador Múltiple</h1>
+      <div id="cotizadorButtons" class="cotizador-buttons"></div>
+      <div>
+        <label for="metros">Metros Cuadrados:</label>
+        <input
+          type="number"
+          id="metros"
+          placeholder="Ingrese metros cuadrados"
+        />
+      </div>
+      <button id="calcular" style="margin-bottom: 20px;">Calcular</button>
+      <div id="resultado"></div>
+      <button id="whatsappButton" style="display: none">
+        Consultar por WhatsApp
+      </button>
+    </div>
+
+    <script>
+      // Definición de los cotizadores
+      const cotizadores = [
+        {
+          nombre: "Tabique",
+          productos: [
+            {
+              producto: "Soleras de 70 x 2,60 mts.",
+              precio: 4156.07,
+              cant_m2: 0.8,
+              unidadMedida: "perfiles",
+              metrosLinealesPorUnidad: 2.6,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Montantes de 70 x 2,60 mts.",
+              precio: 3788.50,
+              cant_m2: 2,
+              unidadMedida: "perfiles",
+              metrosLinealesPorUnidad: 2.6,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Tornillos T1 punta mecha x 100 un.",
+              precio: 2059.83,
+              cant_m2: 10,
+              unidadMedida: "paquetes",
+              unidadesPorPaquete: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Tornillos T2 punta aguja x 100 un.",
+              precio: 1364.09,
+              cant_m2: 20,
+              unidadMedida: "paquetes",
+              unidadesPorPaquete: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Cinta de papel GR x 150 mts.",
+              precio: 9534.02,
+              cant_m2: 3.3,
+              unidadMedida: "rollos",
+              metrosLinealesPorUnidad: 150,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Masilla x 28 kg.",
+              precio: 23158.34,
+              cant_m2: 1.8,
+              unidadMedida: "baldes",
+              unidadesPorPaquete: 28,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Fijaciones nº 8 x 100 un.",
+              precio: 5813.37,
+              cant_m2: 3.5,
+              unidadMedida: "paquetes",
+              unidadesPorPaquete: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Placas STD 12,5 x 1,20 x 2,40m Knauf",
+              precio: 12461.06,
+              cant_m2: 2.05,
+              unidadMedida: "placas",
+              areaUnidad: 2.88,
+              redondeo: "ceil",
+            },
+          ],
+        },
+        {
+          nombre: "Cielorraso",
+          productos: [
+            {
+                producto: "Soleras de 35 x 2,60m",
+                precio: 2760.66,
+                cant_m2: 1.30,
+                unidadMedida: "perfiles",
+                areaUnidad: 2.6,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Montantes de 35 x 2,60m",
+                precio: 3147.23,
+                cant_m2: 2.95,
+                unidadMedida: "perfiles",
+                areaUnidad: 2.6,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Tornillos T1 punta mecha x 100 un.",
+                precio: 2059.83,
+                cant_m2: 16,
+                unidadMedida: "paquetes",
+                areaUnidad: 100,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Tornillos T2 punta aguja x 100 un.",
+                precio: 1364.09,
+                cant_m2: 18,
+                unidadMedida: "paquetes",
+                areaUnidad: 100,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Cinta de papel GR x 150 mts.",
+                precio: 9534.02,
+                cant_m2: 1.65,
+                unidadMedida: "rollos",
+                metrosLinealesPorUnidad: 150,
+                redondeo: "ceil",
+                },
+                {
+              producto: "Masilla x 28 kg.",
+              precio: 23158.34,
+              cant_m2: 0.90,
+              unidadMedida: "baldes",
+              unidadesPorPaquete: 28,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Fijaciones nº 8 x 100 un.",
+              precio: 5813.37,
+              cant_m2: 7,
+              unidadMedida: "paquetes",
+              unidadesPorPaquete: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Placas STD 9,5mm (1,20 x 2,40m)  Knauf",
+              precio: 12461.06,
+              cant_m2: 1.05,
+              unidadMedida: "placas",
+              areaUnidad: 2.88,
+              redondeo: "ceil",
+            },
+          ],
+        },
+        {
+          nombre: "Cielorraso Desmontable",
+          productos: [
+                {
+                producto: "Larguero x 3,66 m",
+                precio: 4234.38,
+                cant_m2: 0.81,
+                unidadMedida: "perfiles",
+                areaUnidad: 3.66,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Perimetral x 3 m",
+                precio: 2816.66,
+                cant_m2: 0.72,
+                unidadMedida: "perfiles",
+                areaUnidad: 3,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Travesaño 1,22 m",
+                precio: 938.89,
+                cant_m2: 1.56,
+                unidadMedida: "perfiles",
+                areaUnidad: 1.22,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Travesaño 0,61 m",
+                precio: 1778.36,
+                cant_m2: 0.78,
+                unidadMedida: "perfiles",
+                areaUnidad: 0.61,
+                redondeo: "ceil",
+                },
+                {
+              producto: "Placa Cosmos 20mm esp (0,61 x 1,22m)",
+              precio: 5424.25,
+              cant_m2: 1.05,
+              unidadMedida: "placas",
+              areaUnidad: 0.7442,
+              redondeo: "ceil",
+            },
+            
+          ],
+        },
+        {
+          nombre: "Revestimiento con Omega",
+          productos: [
+          {
+                producto: "Perfil Omega x 2,60 mts.",
+                precio: 12098.12,
+                cant_m2: 2.45,
+                unidadMedida: "perfiles",
+                areaUnidad:2.6,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Tornillos T2 punta aguja x 100 un.",
+                precio: 12098.12,
+                cant_m2: 13,
+                unidadMedida: "paquetes",
+                areaUnidad: 100,
+                redondeo: "ceil",
+                },
+                {
+                producto: "Cinta de papel GR x 150 mts.",
+                precio: 12098.12,
+                cant_m2: 1.65,
+                unidadMedida: "rollos",
+                metrosLinealesPorUnidad: 150,
+                redondeo: "ceil",
+                },
+                {
+              producto: "Masilla x 28 kg.",
+              precio: 23158.34,
+              cant_m2: 0.90,
+              unidadMedida: "baldes",
+              unidadesPorPaquete: 28,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Fijaciones nº 8 x 100 un.",
+              precio: 5813.37,
+              cant_m2: 6,
+              unidadMedida: "paquetes",
+              unidadesPorPaquete: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Placa STD 12,5 mm esp. (1,20 x 2,40m) Knauf",
+              precio: 12098.12,
+              cant_m2: 1.05,
+              unidadMedida: "placas",
+              areaUnidad: 2.88,
+              redondeo: "ceil",
+            },
+          ],
+        },
+      ];
+
+      let cotizadorActual = 0;
+      let productosEditados = cotizadores.map((c) => [...c.productos]);
+
+      function inicializarCotizadores() {
+        const cotizadorButtons = document.getElementById("cotizadorButtons");
+        cotizadores.forEach((cotizador, index) => {
+          const button = document.createElement("button");
+          button.textContent = cotizador.nombre;
+          button.onclick = () => seleccionarCotizador(index);
+          cotizadorButtons.appendChild(button);
+        });
+      }
+
+      function seleccionarCotizador(index) {
+        cotizadorActual = index;
+        document
+          .querySelectorAll("#cotizadorButtons button")
+          .forEach((btn, i) => {
+            btn.style.backgroundColor = i === index ? "#0ca2d3" : "#292b67";
+          });
+        limpiarResultados();
+      }
+
+      function limpiarResultados() {
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("whatsappButton").style.display = "none";
+      }
+
+      function calcularCotizacion() {
+        const metros = parseFloat(document.getElementById("metros").value);
+        if (isNaN(metros) || metros <= 0) {
+          alert("Por favor, ingrese una cantidad válida de metros cuadrados.");
+          return;
+        }
+
+        const productosActuales = productosEditados[cotizadorActual];
+        let totalCotizacion = 0;
+        let resultadoHTML =
+        /*"<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th><th>Acciones</th></tr>";*/
+          "<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th></tr>";
+
+        productosActuales.forEach((producto, index) => {
+          const {
+            producto: nombre,
+            precio,
+            cant_m2,
+            redondeo,
+            unidadesPorPaquete,
+            areaUnidad,
+            metrosLinealesPorUnidad,
+          } = producto;
+          const cantidadNecesaria = cant_m2 * metros;
+          let cantidadFinal = 0;
+
+          if (redondeo === "ceil") {
+            if (areaUnidad) {
+              cantidadFinal = Math.ceil(cantidadNecesaria / areaUnidad);
+            } else if (unidadesPorPaquete) {
+              cantidadFinal = Math.ceil(cantidadNecesaria / unidadesPorPaquete);
+            } else if (metrosLinealesPorUnidad) {
+              const totalMetrosLineales = cantidadNecesaria;
+              cantidadFinal = Math.ceil(
+                totalMetrosLineales / metrosLinealesPorUnidad
+              );
+            } else {
+              cantidadFinal = Math.ceil(cantidadNecesaria);
+            }
+          } else {
+            cantidadFinal = Math.round(cantidadNecesaria);
+          }
+
+          const total = precio * cantidadFinal;
+          totalCotizacion += total;
+
+         /*  resultadoHTML += `
+                    <tr>
+                        <td>${nombre}</td>
+                        <td>${cantidadFinal} ${producto.unidadMedida}</td>
+                        <td>$${total.toFixed(2)}</td>
+                        <td><button onclick="editarProducto(${index})">Editar</button></td>
+                    </tr>
+                `;
+        }); */
+        resultadoHTML += `
+                    <tr>
+                        <td>${nombre}</td>
+                        <td>${cantidadFinal} ${producto.unidadMedida}</td>
+                        <td>$${total.toFixed(2)}</td>
+                       
+                    </tr>
+                `;
+        });
+
+        resultadoHTML += `
+                <tr>
+                    <td colspan="2"><strong>Total de la cotización</strong></td>
+                    <td colspan="2"><strong>$${totalCotizacion.toFixed(
+                      2
+                    )}</strong></td>
+                </tr>
+            </table>`;
+
+        document.getElementById("resultado").innerHTML = resultadoHTML;
+        document.getElementById("whatsappButton").style.display = "block";
+        actualizarBotonWhatsApp(metros, totalCotizacion);
+      }
+
+      function editarProducto(index) {
+        const producto = productosEditados[cotizadorActual][index];
+        const fila = document
+          .getElementById("resultado")
+          .getElementsByTagName("tr")[index + 1];
+        fila.innerHTML = `
+                <td><input type="text" value="${producto.producto}" onblur="guardarEdicion(${index}, 'producto', this.value)" class="edit-input"></td>
+                <td><input type="number" value="${producto.cant_m2}" onblur="guardarEdicion(${index}, 'cant_m2', this.value)" class="edit-input"></td>
+                <td><input type="number" value="${producto.precio}" onblur="guardarEdicion(${index}, 'precio', this.value)" class="edit-input"></td>
+                <td><button onclick="calcularCotizacion()">Guardar</button></td>
+            `;
+      }
+
+      function guardarEdicion(index, campo, valor) {
+        productosEditados[cotizadorActual][index][campo] =
+          campo === "producto" ? valor : parseFloat(valor);
+      }
+
+      function actualizarBotonWhatsApp(metros, totalCotizacion) {
+        const whatsappButton = document.getElementById("whatsappButton");
+        whatsappButton.onclick = () => {
+          let mensaje = `Realicé esta cotización en la página web para *${metros} metros cuadrados* usando el ${cotizadores[cotizadorActual].nombre}:\n\n`;
+          productosEditados[cotizadorActual].forEach((producto) => {
+            mensaje += `${producto.producto}: ${Math.ceil(
+              producto.cant_m2 * metros
+            )} ${producto.unidadMedida}\n`;
+          });
+          mensaje += `\n*Total de la cotización: $${totalCotizacion.toFixed(
+            2
+          )}*`;
+          window.open(
+            `https://wa.me/541138009483?text=${encodeURIComponent(mensaje)}`,
+            "_blank"
+          );
+        };
+      }
+
+      document
+        .getElementById("calcular")
+        .addEventListener("click", calcularCotizacion);
+      inicializarCotizadores();
+    </script>
+  </body>
+</html>

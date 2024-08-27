@@ -73,17 +73,22 @@
         display: block;
         margin-top: 20px;
       }
-      @media (max-width: 478px){
+      @media (max-width: 478px) {
         .cotizador-buttons {
-            flex-wrap: wrap;
-        flex-direction: column;
+          flex-wrap: wrap;
+          flex-direction: column;
         }
       }
     </style>
   </head>
   <body>
     <div class="container-cotizador">
-      <h1>Cotizador Múltiple</h1>
+      <h1>Cotizá tu obra</h1>
+      <h4>
+        Elegí el tipo de obra a relizar, ingresá la cantidad de metros
+        cuadrados, y luego hacer clic en "Cotizar". Luego podrás consultar por
+        dicha cotización directamente por WhatsApp.
+      </h4>
       <div id="cotizadorButtons" class="cotizador-buttons"></div>
       <div>
         <label for="metros">Metros Cuadrados:</label>
@@ -93,7 +98,7 @@
           placeholder="Ingrese metros cuadrados"
         />
       </div>
-      <button id="calcular" style="margin-bottom: 20px;">Calcular</button>
+      <button id="calcular" style="margin-bottom: 20px">Calcular</button>
       <div id="resultado"></div>
       <button id="whatsappButton" style="display: none">
         Consultar por WhatsApp
@@ -116,7 +121,7 @@
             },
             {
               producto: "Montantes de 70 x 2,60 mts.",
-              precio: 3788.50,
+              precio: 3788.5,
               cant_m2: 2,
               unidadMedida: "perfiles",
               metrosLinealesPorUnidad: 2.6,
@@ -176,49 +181,49 @@
           nombre: "Cielorraso",
           productos: [
             {
-                producto: "Soleras de 35 x 2,60m",
-                precio: 2760.66,
-                cant_m2: 1.30,
-                unidadMedida: "perfiles",
-                areaUnidad: 2.6,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Montantes de 35 x 2,60m",
-                precio: 3147.23,
-                cant_m2: 2.95,
-                unidadMedida: "perfiles",
-                areaUnidad: 2.6,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Tornillos T1 punta mecha x 100 un.",
-                precio: 2059.83,
-                cant_m2: 16,
-                unidadMedida: "paquetes",
-                areaUnidad: 100,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Tornillos T2 punta aguja x 100 un.",
-                precio: 1364.09,
-                cant_m2: 18,
-                unidadMedida: "paquetes",
-                areaUnidad: 100,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Cinta de papel GR x 150 mts.",
-                precio: 9534.02,
-                cant_m2: 1.65,
-                unidadMedida: "rollos",
-                metrosLinealesPorUnidad: 150,
-                redondeo: "ceil",
-                },
-                {
+              producto: "Soleras de 35 x 2,60m",
+              precio: 2760.66,
+              cant_m2: 1.3,
+              unidadMedida: "perfiles",
+              areaUnidad: 2.6,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Montantes de 35 x 2,60m",
+              precio: 3147.23,
+              cant_m2: 2.95,
+              unidadMedida: "perfiles",
+              areaUnidad: 2.6,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Tornillos T1 punta mecha x 100 un.",
+              precio: 2059.83,
+              cant_m2: 16,
+              unidadMedida: "paquetes",
+              areaUnidad: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Tornillos T2 punta aguja x 100 un.",
+              precio: 1364.09,
+              cant_m2: 18,
+              unidadMedida: "paquetes",
+              areaUnidad: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Cinta de papel GR x 150 mts.",
+              precio: 9534.02,
+              cant_m2: 1.65,
+              unidadMedida: "rollos",
+              metrosLinealesPorUnidad: 150,
+              redondeo: "ceil",
+            },
+            {
               producto: "Masilla x 28 kg.",
               precio: 23158.34,
-              cant_m2: 0.90,
+              cant_m2: 0.9,
               unidadMedida: "baldes",
               unidadesPorPaquete: 28,
               redondeo: "ceil",
@@ -232,7 +237,7 @@
               redondeo: "ceil",
             },
             {
-              producto: "Placas STD 9,5mm (1,20 x 2,40m)  Knauf",
+              producto: "Placas STD 9,5mm (1,20 x 2,40m) Knauf",
               precio: 12461.06,
               cant_m2: 1.05,
               unidadMedida: "placas",
@@ -244,39 +249,39 @@
         {
           nombre: "Cielorraso Desmontable",
           productos: [
-                {
-                producto: "Larguero x 3,66 m",
-                precio: 4234.38,
-                cant_m2: 0.81,
-                unidadMedida: "perfiles",
-                areaUnidad: 3.66,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Perimetral x 3 m",
-                precio: 2816.66,
-                cant_m2: 0.72,
-                unidadMedida: "perfiles",
-                areaUnidad: 3,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Travesaño 1,22 m",
-                precio: 938.89,
-                cant_m2: 1.56,
-                unidadMedida: "perfiles",
-                areaUnidad: 1.22,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Travesaño 0,61 m",
-                precio: 1778.36,
-                cant_m2: 0.78,
-                unidadMedida: "perfiles",
-                areaUnidad: 0.61,
-                redondeo: "ceil",
-                },
-                {
+            {
+              producto: "Larguero x 3,66 m",
+              precio: 4234.38,
+              cant_m2: 0.81,
+              unidadMedida: "perfiles",
+              areaUnidad: 3.66,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Perimetral x 3 m",
+              precio: 2816.66,
+              cant_m2: 0.72,
+              unidadMedida: "perfiles",
+              areaUnidad: 3,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Travesaño 1,22 m",
+              precio: 938.89,
+              cant_m2: 1.56,
+              unidadMedida: "perfiles",
+              areaUnidad: 1.22,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Travesaño 0,61 m",
+              precio: 1778.36,
+              cant_m2: 0.78,
+              unidadMedida: "perfiles",
+              areaUnidad: 0.61,
+              redondeo: "ceil",
+            },
+            {
               producto: "Placa Cosmos 20mm esp (0,61 x 1,22m)",
               precio: 5424.25,
               cant_m2: 1.05,
@@ -284,40 +289,39 @@
               areaUnidad: 0.7442,
               redondeo: "ceil",
             },
-            
           ],
         },
         {
           nombre: "Revestimiento con Omega",
           productos: [
-          {
-                producto: "Perfil Omega x 2,60 mts.",
-                precio: 12098.12,
-                cant_m2: 2.45,
-                unidadMedida: "perfiles",
-                areaUnidad:2.6,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Tornillos T2 punta aguja x 100 un.",
-                precio: 12098.12,
-                cant_m2: 13,
-                unidadMedida: "paquetes",
-                areaUnidad: 100,
-                redondeo: "ceil",
-                },
-                {
-                producto: "Cinta de papel GR x 150 mts.",
-                precio: 12098.12,
-                cant_m2: 1.65,
-                unidadMedida: "rollos",
-                metrosLinealesPorUnidad: 150,
-                redondeo: "ceil",
-                },
-                {
+            {
+              producto: "Perfil Omega x 2,60 mts.",
+              precio: 12098.12,
+              cant_m2: 2.45,
+              unidadMedida: "perfiles",
+              areaUnidad: 2.6,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Tornillos T2 punta aguja x 100 un.",
+              precio: 12098.12,
+              cant_m2: 13,
+              unidadMedida: "paquetes",
+              areaUnidad: 100,
+              redondeo: "ceil",
+            },
+            {
+              producto: "Cinta de papel GR x 150 mts.",
+              precio: 12098.12,
+              cant_m2: 1.65,
+              unidadMedida: "rollos",
+              metrosLinealesPorUnidad: 150,
+              redondeo: "ceil",
+            },
+            {
               producto: "Masilla x 28 kg.",
               precio: 23158.34,
-              cant_m2: 0.90,
+              cant_m2: 0.9,
               unidadMedida: "baldes",
               unidadesPorPaquete: 28,
               redondeo: "ceil",
@@ -380,8 +384,8 @@
         const productosActuales = productosEditados[cotizadorActual];
         let totalCotizacion = 0;
         let resultadoHTML =
-        /*"<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th><th>Acciones</th></tr>";*/
-          "<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th></tr>";
+          /*"<table><tr><th>Producto</th><th>Cantidad Necesaria</th><th>Total</th><th>Acciones</th></tr>";*/
+          "<table><tr><th  style='padding: 5px 3px;  text-align:center; text-align:center;'>Producto</th><th style='padding: 5px 3px;  text-align:center;'>Cantidad Necesaria</th><th tyle='padding: 5px 3px;  text-align:center;'>Total</th></tr>";
 
         productosActuales.forEach((producto, index) => {
           const {
@@ -416,20 +420,22 @@
           const total = precio * cantidadFinal;
           totalCotizacion += total;
 
-         /*  resultadoHTML += `
+          /*  resultadoHTML += `
                     <tr>
-                        <td>${nombre}</td>
+                        <td style="">${nombre}</td>
                         <td>${cantidadFinal} ${producto.unidadMedida}</td>
                         <td>$${total.toFixed(2)}</td>
                         <td><button onclick="editarProducto(${index})">Editar</button></td>
                     </tr>
                 `;
         }); */
-        resultadoHTML += `
+          resultadoHTML += `
                     <tr>
-                        <td>${nombre}</td>
-                        <td>${cantidadFinal} ${producto.unidadMedida}</td>
-                        <td>$${total.toFixed(2)}</td>
+                        <td style="padding: 5px 3px;  text-align:center;">${nombre}</td>
+                        <td style="padding: 5px 3px;  text-align:center;">${cantidadFinal} ${
+            producto.unidadMedida
+          }</td>
+                        <td style="padding: 5px 3px;  text-align:center;">$${total.toFixed(2)}</td>
                        
                     </tr>
                 `;

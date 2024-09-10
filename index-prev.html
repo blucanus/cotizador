@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador</title>
+</head>
+<body>
+    <div class="container-cotizador">
+        <h1>Cotizá tu obra</h1>
+        <h4>
+          Elegí el tipo de obra a relizar, ingresá la cantidad de metros
+          cuadrados, y luego hacer clic en "Cotizar". Luego podrás consultar por
+          dicha cotización directamente por WhatsApp.
+        </h4>
+        <div id="cotizadorButtons" class="cotizador-buttons"></div>
+        <div>
+          <label for="metros">Metros Cuadrados:</label>
+          <input type="number" id="metros" placeholder="Ingrese metros cuadrados" />
+        </div>
+        <button id="calcular" style="margin-bottom: 20px">Calcular</button>
+        <div id="resultado"></div>
+        <button id="whatsappButton" style="display: none">
+          Consultar por WhatsApp
+        </button>
+      </div>
+
+    <script src="assets/js/cotizador.js"></script>
+</body>
+</html>

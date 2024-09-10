@@ -5,94 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cotizador Múltiple</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-
-    .container-cotizador {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    .cotizador-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 15px;
-      background-color: #292b67;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #0ca2d3;
-    }
-
-    input[type="number"] {
-     /*  width: 100%; */
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .edit-input {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    #whatsappButton {
-      display: block;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 478px) {
-      .cotizador-buttons {
-        flex-wrap: wrap;
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -114,6 +27,75 @@
       Consultar por WhatsApp
     </button>
   </div>
+  <section class="section-features">
+    <div class="col">
+      <div class="e-card playing">
+        <div class="image"></div>
+
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+
+
+        <div class="infotop">
+          <img src="assets/img/logo-solo-sites.png" />
+          <br>
+          Desarrollos Web
+          <br>
+          <div class="name">Web App - Apps - ecommerce</div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+    
+<div class="plan">
+		<div class="inner">
+			<span class="pricing">
+				<span>
+					U$S 450 <!-- <small>/ m</small> -->
+				</span>
+			</span>
+			<p class="title">Multi Cotizador</p>
+			<p class="info">Herramienta que permite realizar cotizaciones inmediatas en base a diferentes parámetros.</p>
+			<ul class="features">
+				<li>
+					<span class="icon-new">
+						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none"></path>
+							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+						</svg>
+					</span>
+					<span>Bases de datos</span>
+				</li>
+				<li>
+					<span class="icon-new">
+						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none"></path>
+							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+						</svg>
+					</span>
+					<span>Personalización</strong></span>
+				</li>
+				<li>
+					<span class="icon-new">
+						<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none"></path>
+							<path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"></path>
+						</svg>
+					</span>
+					<span>Atención personalizada</span>
+				</li>
+			</ul>
+			<div class="action">
+			<a class="button" href="https://wa.me/542215755696">
+				Contactanos
+			</a>
+			</div>
+		</div>
+	</div>
+    </div>
+   <!--  <div class="col"></div> -->
+  </section>
 
   <script>
     // Definición de los cotizadores
@@ -452,9 +434,9 @@
       document.getElementById("whatsappButton").style.display = "block";
       actualizarBotonWhatsApp(metros, totalCotizacion);
 
-      
+
     }
-    
+
     function actualizarBotonWhatsApp(metros, totalCotizacion) {
       const whatsappButton = document.getElementById("whatsappButton");
       whatsappButton.onclick = () => {
@@ -462,35 +444,35 @@
         console.log(productosEditados);
         productosEditados[cotizadorActual].forEach((producto) => {
           const {
-          producto: nombre,
-          precio,
-          cant_m2,
-          redondeo,
-          unidadesPorPaquete,
-          areaUnidad,
-          metrosLinealesPorUnidad,
-        } = producto;
-        const cantidadNecesaria = cant_m2 * metros;
-        let cantidadFinal = 0;
+            producto: nombre,
+            precio,
+            cant_m2,
+            redondeo,
+            unidadesPorPaquete,
+            areaUnidad,
+            metrosLinealesPorUnidad,
+          } = producto;
+          const cantidadNecesaria = cant_m2 * metros;
+          let cantidadFinal = 0;
 
-        if (redondeo === "ceil") {
-          if (areaUnidad) {
-            cantidadFinal = Math.ceil(cantidadNecesaria / areaUnidad);
-          } else if (unidadesPorPaquete) {
-            cantidadFinal = Math.ceil(cantidadNecesaria / unidadesPorPaquete);
-          } else if (metrosLinealesPorUnidad) {
-            const totalMetrosLineales = cantidadNecesaria;
-            cantidadFinal = Math.ceil(
-              totalMetrosLineales / metrosLinealesPorUnidad
-            );
+          if (redondeo === "ceil") {
+            if (areaUnidad) {
+              cantidadFinal = Math.ceil(cantidadNecesaria / areaUnidad);
+            } else if (unidadesPorPaquete) {
+              cantidadFinal = Math.ceil(cantidadNecesaria / unidadesPorPaquete);
+            } else if (metrosLinealesPorUnidad) {
+              const totalMetrosLineales = cantidadNecesaria;
+              cantidadFinal = Math.ceil(
+                totalMetrosLineales / metrosLinealesPorUnidad
+              );
+            } else {
+              cantidadFinal = Math.ceil(cantidadNecesaria);
+            }
           } else {
-            cantidadFinal = Math.ceil(cantidadNecesaria);
+            cantidadFinal = Math.round(cantidadNecesaria);
           }
-        } else {
-          cantidadFinal = Math.round(cantidadNecesaria);
-        }
-        const total = precio * cantidadFinal;
-        mensaje += `${nombre} ${cantidadFinal} ${producto.unidadMedida}\n`;
+          const total = precio * cantidadFinal;
+          mensaje += `${nombre} ${cantidadFinal} ${producto.unidadMedida}\n`;
         });
         mensaje += `\n*Total de la cotización: $${totalCotizacion.toFixed(2)}*`;
         window.open(

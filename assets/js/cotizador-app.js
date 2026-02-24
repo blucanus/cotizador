@@ -77,6 +77,14 @@
       return;
     }
 
+    if (!message) {
+      elements.status.textContent = "";
+      elements.status.className = "cotizador-status";
+      elements.status.style.display = "none";
+      return;
+    }
+
+    elements.status.style.display = "block";
     elements.status.textContent = message;
     elements.status.className = `cotizador-status ${type || ""}`.trim();
   }
@@ -224,37 +232,33 @@
   }
 
   async function loadCotizadores() {
-    try {
-      const payload = await fetchJson(config.apiUrl);
-      const cotizadores = normalizePayload(payload);
-      if (!cotizadores.length) {
-        throw new Error("La API no devolvio cotizadores validos");
-      }
-
-      setStatus("Datos sincronizados desde Google Sheets.", "ok");
-      return cotizadores;
-    } catch (apiError) {
-      const payload = await fetchJson(config.fallbackUrl);
-      const cotizadores = normalizePayload(payload);
-
-      if (!cotizadores.length) {
-        throw new Error(`Error API: ${apiError.message}. Error fallback: sin datos validos.`);
-      }
-
-      setStatus("Usando datos de respaldo local (revisa la API).", "warn");
-      return cotizadores;
+    const payload = await fetchJson(config.apiUrl);
+    if (payload && payload.error) {
+      throw new Error("api-error");
     }
+
+    if (payload && Number(payload.missingCount) > 0) {
+      throw new Error("missing-products");
+    }
+
+    const cotizadores = normalizePayload(payload);
+    if (!cotizadores.length) {
+      throw new Error("empty-data");
+    }
+
+    return cotizadores;
   }
 
   async function init() {
-    setStatus("Cargando lista de materiales...", "loading");
+    setStatus("", "");
 
     try {
       state.cotizadores = await loadCotizadores();
       renderButtons();
       elements.calcular.addEventListener("click", calcularCotizacion);
+      setStatus("", "");
     } catch (error) {
-      setStatus(`No se pudo iniciar el cotizador: ${error.message}`, "error");
+      setStatus("Ha ocurrido un error.", "error");
       elements.calcular.disabled = true;
     }
   }

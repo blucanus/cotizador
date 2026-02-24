@@ -4,17 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cotizador Multiple</title>
+  <title>Widget Cotizador</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    body {
+      padding: 12px;
+    }
+
+    .container-cotizador {
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .section-features {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container-cotizador">
-    <h1>Cotiza tu obra</h1>
-    <h4>
-      Elige el tipo de obra, ingresa la cantidad de metros cuadrados y calcula una estimacion.
-      La lista de productos se actualiza automaticamente desde Google Sheets.
-    </h4>
+    <h1>Cotizador</h1>
+    <h4>Calcula materiales y total estimado desde datos sincronizados.</h4>
 
     <div id="cotizadorStatus" class="cotizador-status loading">Cargando...</div>
     <div id="cotizadorButtons" class="cotizador-buttons"></div>
@@ -33,7 +44,7 @@
     window.COTIZADOR_CONFIG = {
       apiUrl: "/api/cotizador",
       fallbackUrl: "/assets/js/cotizadores-fallback.json",
-      whatsappPhone: "541138009483"
+      whatsappPhone: "542215755696"
     };
   </script>
   <script src="assets/js/cotizador-app.js" defer></script>

@@ -41,6 +41,10 @@ button:hover {
     background-color: #0ca2d3;
 }
 
+button.is-active {
+    background-color: #0ca2d3;
+}
+
 input[type="number"] {
     width: 100%;
     padding: 10px;
@@ -78,6 +82,35 @@ th {
     margin-top: 20px;
 }
 
+.cotizador-status {
+    margin: 8px 0 14px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #eef3f9;
+    color: #2f3f56;
+}
+
+.cotizador-status.ok {
+    background: #eaf7ef;
+    color: #2c6f41;
+}
+
+.cotizador-status.loading {
+    background: #eef3f9;
+    color: #2f3f56;
+}
+
+.cotizador-status.warn {
+    background: #fff4df;
+    color: #815d1f;
+}
+
+.cotizador-status.error {
+    background: #fde9e9;
+    color: #8f2a2a;
+}
+
 @media (max-width: 478px) {
     .cotizador-buttons {
         flex-wrap: wrap;
@@ -92,6 +125,15 @@ th {
     gap: 3rem;
     align-items: center;
     padding: 60px 0;
+}
+
+@media (max-width: 860px) {
+    .section-features {
+        width: 100%;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 24px 0;
+    }
 }
 .infotop img {
     width: 50%;
